@@ -9,7 +9,17 @@
 WebServer server(80);             
  
 void setup() {
+  //Añadir inicialización de pines
+  pinMode(pUltraSonicTriger, INPUT);
+  pinMode(pUltraSonicEcho, INPUT);
+  pinMode(pPh, INPUT);
+  pinMode(pCapacitive1, INPUT);
+  pinMode(pCapacitive2, INPUT);
+  pinMode(pCapacitive2, INPUT);
+  pinMode(pBombaAgua, OUTPUT);
 
+  //Estado de outputs
+  sBombaAgua= 0;
 
   Serial.begin(115200);
   delay(100);
@@ -30,6 +40,7 @@ void setup() {
   Serial.println(WiFi.localIP());
 
   server.on("/", handle_OnConnect);
+  server.on("/pump", handlePump);
   server.onNotFound(handle_NotFound);
 
   server.begin();
@@ -40,11 +51,13 @@ void loop() {
   updateCapacitive(pCapacitive2, sCapacitive2);
   updatePh();
   updateUltrasonic();
+  sBombaAgua= digitalRead(pBombaAgua);
   server.handleClient();
 }
 
 void handle_OnConnect() {
-
+  server.sendHeader("Access-Control-Allow-Headers", "*");
+  server.sendHeader("Access-Control-Allow-Origin", "*");
   server.send(200, "application/json", statusJson()); 
 }
 
@@ -55,9 +68,10 @@ void handle_NotFound(){
 String statusJson(){
     String response = 
     String("{")+
+        "\"pump\":"+ String(sBombaAgua)+","+
         "\"ultrasonic\":"+ String(sUltrasonic)+","+
         "\"capacitive1\":"+ String(sCapacitive1)+","+
-        "\"capacitive12\":"+ String(sCapacitive2)+","+
+        "\"capacitive2\":"+ String(sCapacitive2)+","+
         "\"'ph'\":"+ String(sPh)+
         
     "}"
@@ -67,3 +81,9 @@ String statusJson(){
     return response;
   
 }
+
+void handlePump(){
+  sBombaAgua= !sBombaAgua;
+}
+
+
