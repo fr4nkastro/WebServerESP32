@@ -10,13 +10,14 @@ WebServer server(80);
  
 void setup() {
   //Añadir inicialización de pines
-  pinMode(pUltraSonicTriger, INPUT);
-  pinMode(pUltraSonicEcho, INPUT);
+  pinMode(pUltraSonicTriger, OUTPUT);
+  pinMode(pUltraSonicEcho, OUTPUT);
   pinMode(pPh, INPUT);
   pinMode(pCapacitive1, INPUT);
   pinMode(pCapacitive2, INPUT);
   pinMode(pCapacitive2, INPUT);
   pinMode(pBombaAgua, OUTPUT);
+  pinMode(pAlarm, OUTPUT);
 
   //Estado de outputs
   sBombaAgua= 0;
@@ -86,4 +87,14 @@ void handlePump(){
   sBombaAgua= !sBombaAgua;
 }
 
+void updateLimitAgua(){
+  if(1.0*alturaMax/sUltrasonic *100 >limitAgua ){
+    sAlarm=1;
+   
+  }
+  else{
+    sAlarm=0;
+  }
+   digitalWrite(pAlarm, sAlarm);
+}
 

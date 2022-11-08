@@ -14,10 +14,10 @@ void updateUltrasonic()
   t = pulseIn(pUltraSonicEcho, HIGH); //obtenemos el ancho del pulso
   d = t/59;             //escalamos el tiempo a una distancia en cm
   
-  Serial.print("Distancia: ");
-  Serial.print(d);      //Enviamos serialmente el valor de la distancia
-  Serial.print("cm");
+  // Serial.print("Distancia: ");
+  // Serial.print(d);      //Enviamos serialmente el valor de la distancia
+  // Serial.print("cm");
   sUltrasonic= d;
-  Serial.println();
+  // Serial.println();
   delay(800);          //Hacemos una pausa de 800ms
 }

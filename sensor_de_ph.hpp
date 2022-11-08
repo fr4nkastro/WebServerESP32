@@ -21,6 +21,6 @@ void updatePh()
     float voltage = 5 / adc_resolution * measurings/samples;
     Serial.print("pH= ");
     sPh= ph(voltage);
-    Serial.println(sPh);
+    // Serial.println(sPh);
     delay(100);
 }
