@@ -18,6 +18,6 @@ void updateUltrasonic()
   // Serial.print(d);      //Enviamos serialmente el valor de la distancia
   // Serial.print("cm");
   sUltrasonic= d;
-  // Serial.println();
+   Serial.println(t);
   delay(800);          //Hacemos una pausa de 800ms
 }

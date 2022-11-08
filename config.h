@@ -1,9 +1,9 @@
 const char *ssid = "Realme";  // Enter SSID here
-const char* password = "Hola2009";  //Enter Password here
+const char* password = "hola2009";  //Enter Password here
 
 
-int pUltraSonicTriger= 36;
-int pUltraSonicEcho=39;
+int pUltraSonicTriger= 27;
+int pUltraSonicEcho=26;
 int pPh=34;
 int pCapacitive1=35;
 int pCapacitive2=32;
